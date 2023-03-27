@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include "../stb-master_lib/stb_easy_font.h"
+#include "stb-master_lib/stb_easy_font.h"
 #include "texture.hpp"
 
 Button *btns;
@@ -68,7 +68,8 @@ void ShowButton(int buttonId) {
 void Menu_ShowMenu() {
     int start, finish;
     switch (menuState) {
-        case 1: start = 3; finish = btnCnt; break;
+        case 1: start = 3; finish = 6; break;
+        case 2: start = 6; finish = 7; break;
         default: start = 0; finish = 3;
     }
     for(int i=start; i<finish; i++) ShowButton(i);
@@ -85,7 +86,8 @@ int Menu_MouseMove (float x, float y) {
     int movebtn=-1;
     int start, finish;
     switch (menuState) {
-        case 1: start = 3; finish = btnCnt; break;
+        case 1: start = 3; finish = 6; break;
+        case 2: start = 6; finish = 7; break;
         default: start = 0; finish = 3;
     }
     for(int i=start; i<finish; i++)
@@ -103,7 +105,8 @@ int Menu_MouseDown() {
     int downbtn=-1;
     int start, finish;
     switch (menuState) {
-        case 1: start = 3; finish = btnCnt; break;
+        case 1: start = 3; finish = 6; break;
+        case 2: start = 6; finish = 7; break;
         default: start = 0; finish = 3;
     }
     for(int i=start; i<finish; i++)
@@ -127,13 +130,12 @@ void MouseDown() {
     printf("%s\n",name, &buttonId);
 
     switch (buttonId) {
-    case 1: menuState = 1; break;
-    case 3: nextLine(-1); break;
-    case 4: nextLine(1); break;
-    case 5: menuState = 0; break;
-    case 2:
-        PostQuitMessage(0);
-        break;
+        case 0: menuState = 2; break;
+        case 1: menuState = 1; break;
+        case 2: PostQuitMessage(0); break;
+        case 3: nextLine(-1); break;
+        case 4: nextLine(1); break;
+        case 5: menuState = 0; break;
+        case 6: menuState = 0; break;
     }
-
 }

@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Lab2" />
+		<Option title="Game" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -24,8 +24,8 @@
 			<Add library="glu32" />
 			<Add library="gdi32" />
 		</Linker>
-		<Unit filename="../stb-master_lib/stb_easy_font.h" />
-		<Unit filename="../stb-master_lib/stb_image.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.hpp" />
 		<Unit filename="main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -33,6 +33,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.hpp" />
+		<Unit filename="stb-master_lib/stb_easy_font.h" />
+		<Unit filename="stb-master_lib/stb_image.h" />
 		<Unit filename="texture.cpp" />
 		<Unit filename="texture.hpp" />
 		<Extensions>

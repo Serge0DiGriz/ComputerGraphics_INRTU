@@ -2,6 +2,7 @@
 #include <gl/gl.h>
 #include "menu.hpp"
 #include "texture.hpp"
+#include "game.hpp"
 
 #ifndef WINDOW_SIZE
 #define WINDOW_SIZE
@@ -11,7 +12,7 @@
 
 using namespace std;
 
-GLuint bg;
+GLuint texture;
 
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
 void EnableOpenGL(HWND hwnd, HDC*, HGLRC*);
@@ -25,6 +26,7 @@ void init_buttons() {
     Menu_AddButton("<", (WIDTH-sp)/2.-btn_h, HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton(">", (WIDTH+sp)/2., HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton("Back", (WIDTH-btn_w)/2., HEIGHT/2.+2*sp+btn_h, btn_w, btn_h, 2);
+    Menu_AddButton("Menu", 5, 5, btn_w/3, btn_h/2, 1.5);
 }
 
 
@@ -39,7 +41,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
     HGLRC hRC;
     MSG msg;
     BOOL bQuit = FALSE;
-    float theta = 0.0f;
 
     /* register window class */
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -82,8 +83,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
     GetClientRect(hwnd, &rct);
     glOrtho(0,rct.right,0,rct.bottom,1,-1);
     init_buttons();
-    getButtons()[0].isActive = false;
-    Load_Texture( "./Assets/crab.png", &bg, GL_REPEAT, GL_REPEAT, GL_NEAREST);
+    //getButtons()[0].isActive = false;
+    Load_Texture( "./Assets/crab.png", &texture, GL_REPEAT, GL_REPEAT, GL_NEAREST);
 
     /* program main loop */
     while (!bQuit)
@@ -109,7 +110,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
             glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (getState() == 1) Show_Background(bg);
+            switch (getState()) {
+                case 1: Show_Background(texture); break;
+                case 2: Game(texture); break;
+            }
 
             glPushMatrix();
             glLoadIdentity();
@@ -119,7 +123,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 
             SwapBuffers(hDC);
-            Sleep (1);
+            Sleep(1);
         }
     }
 
