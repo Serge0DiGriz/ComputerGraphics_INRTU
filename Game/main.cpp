@@ -6,8 +6,8 @@
 
 #ifndef WINDOW_SIZE
 #define WINDOW_SIZE
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 1282
+#define HEIGHT 732
 #endif // WINDOW_SIZE
 
 using namespace std;
@@ -26,7 +26,7 @@ void init_buttons() {
     Menu_AddButton("<", (WIDTH-sp)/2.-btn_h, HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton(">", (WIDTH+sp)/2., HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton("Back", (WIDTH-btn_w)/2., HEIGHT/2.+2*sp+btn_h, btn_w, btn_h, 2);
-    Menu_AddButton("Menu", 5, 5, btn_w/3, btn_h/2, 1.5);
+    Menu_AddButton("Menu", 3, 3, btn_w/3, btn_h/2.1, 1.5);
 }
 
 
@@ -64,7 +64,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     hwnd = CreateWindowEx(0,
                           "GLSample",
                           "OpenGL Sample",
-                          WS_OVERLAPPEDWINDOW,
+                          WS_MINIMIZEBOX|WS_SYSMENU,
                           CW_USEDEFAULT,
                           CW_USEDEFAULT,
                           WIDTH,
@@ -107,7 +107,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
         {
             /* OpenGL animation code goes here */
 
-            glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
+            if (getState() == 2) glClearColor(0.4f, 0.6f, 1.0f, 0.0f);
+            else  glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             switch (getState()) {
@@ -149,7 +150,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
         case WM_KEYDOWN: {
             switch (wParam) {
-                case VK_ESCAPE: PostQuitMessage(0); break;
+                case VK_ESCAPE: {
+                    if (getState() == 0) PostQuitMessage(0);
+                    else setState(0);
+                    break;
+                }
             }
         } break;
 

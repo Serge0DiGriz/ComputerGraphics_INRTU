@@ -12,6 +12,7 @@ struct Button {
 
 Button* getButtons();
 int getState();
+void setState(int st);
 
 int Menu_AddButton(char *name, float x, float y, float width, float height, float textS);
 void ShowButton(int buttonId);

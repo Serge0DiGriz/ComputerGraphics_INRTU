@@ -3,8 +3,8 @@
 
 #ifndef WINDOW_SIZE
 #define WINDOW_SIZE
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 1282
+#define HEIGHT 732
 #endif // WINDOW_SIZE
 
 void Load_Texture( char *filename, GLuint *textureID, int swarp, int twarp, int filter);

@@ -14,6 +14,7 @@ int menuState = 0;
 
 Button* getButtons() { return btns; }
 int getState() { return menuState; }
+void setState(int st) { menuState = st; }
 
 int Menu_AddButton(char *name, float x, float y, float width, float height, float textS) {
     btns = (Button*)realloc(btns, sizeof(btns[0])*(++btnCnt));
