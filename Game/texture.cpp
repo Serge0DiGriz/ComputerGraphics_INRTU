@@ -26,7 +26,6 @@ void GlSettingsOn(GLuint texture) {
     glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
     glEnable(GL_ALPHA_TEST);
     glAlphaFunc(GL_GREATER, 0.7);
-    glBindTexture(GL_TEXTURE_2D, texture);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);

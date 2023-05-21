@@ -8,6 +8,8 @@
 #endif // WINDOW_SIZE
 
 #include <string>
+#include <iostream>
+#include "menu.hpp"
 
 #define LEFT -1
 #define RIGHT 1
@@ -16,56 +18,65 @@ inline float min(float a, float b) { return a<b ? a : b; }
 inline float max(float a, float b) { return a>b ? a : b; }
 
 const std::string TileMap[] = {
-    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    "X                           X          X",
-    "X                           X          X",
-    "X                           X          X",
-    "X                           X          X",
-    "X                           X          X",
-    "X                           X          X",
-    "X                                      X",
-    "X                                      X",
-    "X              XXXXXXXXXXX             X",
-    "X                                      X",
-    "X                                      X",
-    "XXXXXXXXX                              X",
-    "X                                      X",
-    "X                                      X",
-    "X         XXXXXXXXXXXXXXX              X",
-    "X                              XXXXXXXXX",
-    "X                                      X",
-    "X                                      X",
-    "X                    XXXXXXXXXX        X",
-    "X                                      X",
-    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "X                                                                              X",
+    "X                                                                              X",
+    "X                                                                         F    X",
+    "X                                                                              X",
+    "X                      1                                                       X",
+    "X                                                                   XXXXXXXXXXXX",
+    "X                 XXXXXXXXXXXX                                                 X",
+    "X                                                    XXXXXXXXX                 X",
+    "X                                                                              X",
+    "X                                  XXXXXXXXXXXXXX                              X",
+    "X                                                                              X",
+    "X                                                                              X",
+    "X           XXXXXXXXXXXXXXXXX                                                  X",
+    "X                                                                              X",
+    "X                                XXXXXXXXXXXX                                  X",
+    "XXXXX                  6                                                       X",
+    "X                                                                              X",
+    "X                XXXXXXXXX                         XXXXXXXXXXXXXX              X",
+    "X                                                                              X",
+    "X  3                                                                           X",
+    "X                                                                      XXXXXXXXX",
+    "XXXXXXX                                                                        X",
+    "X               XXXXXXXXXXX                                                2   X",
+    "X                                                                              X",
+    "X                                                             XXXXXXXXXXXXXXXXXX",
+    "X                                  XXXXXXXXXXXXXXXX                            X",
+    "X    4                         XXXXXXXXXXXXXXXXXXXXXXXX                        X",
+    "X                                                                              X",
+    "XXXXXXXXXXXXXXXXXXXXXXXX                                                       X",
+    "X                      XX                                XXXXXXXXX             X",
+    "X                       XXXXXX                                                 X",
+    "X    5                       X                                                 X",
+    "X                            X                                                 X",
+    "XXXXXXXXXXXXXXXX             X                                        XXXXXXXXXX",
+    "XXXXXXXXXXXXXXXX             X                                                 X",
+    "XXXXXXXXXXXXXXXX             X       XXXXXXXXXXXXXXX                           X",
+    "X                                                                              X",
+    "X                                                      XXXXXXXXXX              X",
+    "X                                                                              X",
+    "X                                                                              X",
+    "X                                                                              X",
+    "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 };
+
+
 
 struct Hero {
     float x,y, vx=0,vy=0, ax=0,ay=-1;
     bool onGround = true;
     short direction = RIGHT;
     const short w = 225, h=128;
-    float scale = 0.5;
+    float scale = 0.3;
+    int score = (1 << 6) - 1;
 
     int animation = 0, frame = 0, itr = 0;
 
     void iter() {
-        /*
-        if (checkMove(x + vx*direction, y + vy)) {
-            x += vx*direction;
-            y += vy;
-            vx = max(0, vx+ax);
-            vy = vy+ay;
-        } else {
-            vx /= 2.0f;
-            vy /= 2.0f;
-        }
-        */
-        //x = min(max(0, x + vx*direction), WIDTH-w*scale);
-        //y = min(max(1, y + vy), HEIGHT-h*scale);
-        //vx = max(0, vx+ax);
-        //vy = vy+ay;
-
         move(vx*direction, vy);
 
         if (vx < 0.001) vx = ax = 0;
@@ -89,14 +100,17 @@ struct Hero {
     void move(float dx, float dy) {
         int row=0, col=0;
         bool check;
-
         // check y
         check = true;
         if (dy != 0) {
-            row = (dy < 0 ? y+dy : min(HEIGHT-32, y+dy+h*scale))/32;
-            for (float cx=x; check && cx<min(WIDTH-33, x+w*scale); cx+=16) {
-                col = cx/32;
-                check = check && (TileMap[row][col] == ' ');
+            row = (dy < 0 ? y+dy : min(HEIGHT-16, y+dy+h*scale))/16;
+            for (float cx=x; check && cx<min(WIDTH-17, x+w*scale); cx+=8) {
+                col = cx/16;
+                check = check && (TileMap[43-row][col] != 'X');
+                if('0' <= TileMap[43-row][col] || TileMap[43-row][col] <= '9') {
+                    score = score & ~(1 << (TileMap[43-row][col]-'0'-1));
+                }
+                if (TileMap[43-row][col] == 'F' && score == 0) setState(3);
             }
         }
         if (check) {
@@ -104,17 +118,20 @@ struct Hero {
             vy += ay;
         }
         else {
-            y = (dy < 0) ? ((int)y/32)*32 : ((int) min(HEIGHT-32, y+h*scale)/32 + 1)*32 - 1;
+            y = (dy < 0) ? ((int)y/16)*16 : ((int) min(HEIGHT-16, y+h*scale)/16 + 1)*16 - h*scale - 1;
             vy = 0;
         }
 
         // check x
         check = true;
         if (dx != 0) {
-            col = (dx < 0 ? x+dx : min(WIDTH-33, x+dx+w*scale))/32;
-            for (float cy=y; check && cy<min(HEIGHT-32, y+h*scale); cy+=16) {
-                row = cy/32;
-                check = check && (TileMap[row][col] == ' ');
+            col = (dx < 0 ? x+dx : min(WIDTH-17, x+dx+w*scale))/16;
+            for (float cy=y; check && cy<min(HEIGHT-16, y+h*scale); cy+=8) {
+                row = cy/16;
+                check = check && (TileMap[43-row][col] != 'X');
+                if('0' <= TileMap[43-row][col] || TileMap[43-row][col] <= '9') {
+                    score = score & ~(1 << (TileMap[43-row][col]-'0'-1));
+                }
             }
         }
         if (check) {
@@ -122,41 +139,16 @@ struct Hero {
             vx = max(0, vx+ax);
         }
         else {
-            x = (dx < 0) ? ((int) x/32)*32 : ((int) min(WIDTH-33, x+w*scale)/32 + 1)*32 - 1;
+            x = (dx < 0) ? ((int) x/16)*16 : ((int) min(WIDTH-33, x+w*scale)/16 + 1)*16 - w*scale - 1;
             vx = ax = 0;
         }
     }
 
-    bool checkMove(float x, float y) {
-        float limx = min(x+w*scale, WIDTH), limy = min(y+h*scale, HEIGHT);
-        int row, col;
-        bool check = true;
-        for (int mx=x; check && mx<limx; mx+=16)
-        for (int my=y; check && my<limy; my+=16) {
-            // 1
-            row = my/32; col = x/32;
-            check = check && (TileMap[row][col] == ' ');
-
-            // 2
-            row = my/32; col = limx/32;
-            check = check && (TileMap[row][col] == ' ');
-
-            // 3
-            row = y/32; col = mx/32;
-            check = check && (TileMap[row][col] == ' ');
-
-            // 4
-            row = limy/32; col = mx/32;
-            check = check && (TileMap[row][col] == ' ');
-        }
-        return check;
-    }
-
     void checkGround() {
         bool check = false;
-        for (int mx=x; (!check) && mx<min(WIDTH, x+w*scale); mx+=16) {
-            int row = (y-1)/32, col = mx/32;
-            check = check || (TileMap[row][col] == 'X');
+        for (int mx=x; (!check) && mx<min(WIDTH, x+w*scale); mx+=8) {
+            int row = (y-2)/16, col = mx/16;
+            check = check || (TileMap[43-row][col] == 'X');
         }
 
         if (check && !onGround) {
@@ -174,13 +166,13 @@ struct Hero {
         if (onGround) {
             onGround = false;
             ay = -1;
-            vy = 15;
+            vy = 12.5;
             ax = -0.2;
             vx = 8;
         }
     }
 };
 
-void Game(GLuint texture);
+void Game(GLuint texture, GLuint background);
 
 #endif // GAME_HPP

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-GLuint texture;
+GLuint texture, game_background;
 
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
 void EnableOpenGL(HWND hwnd, HDC*, HGLRC*);
@@ -26,10 +26,39 @@ void init_buttons() {
     Menu_AddButton("<", (WIDTH-sp)/2.-btn_h, HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton(">", (WIDTH+sp)/2., HEIGHT/2.+sp, btn_h, btn_h, 3);
     Menu_AddButton("Back", (WIDTH-btn_w)/2., HEIGHT/2.+2*sp+btn_h, btn_w, btn_h, 2);
-    Menu_AddButton("Menu", 3, 3, btn_w/3, btn_h/2.1, 1.5);
+    Menu_AddButton("Menu", 4, 4, btn_w/3, btn_h/2.1, 1.5);
 }
+/*
+void finish() {
+    char name[] = "Finish!";
+    float vert[8] = {WIDTH/2-50, HEIGHT/2+20, };
+    float buffer[1000];
+    int num_quads = stb_easy_font_print(0, 0, name,0, buffer, sizeof(buffer));
+
+    glVertexPointer(2, GL_FLOAT, 0, vert);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glColor3f(0.8,0.8,0.8);
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+    glLineWidth(1);
+    glDrawArrays(GL_LINE_LOOP,0,4);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+    glPushMatrix();
+    glColor3f(0.1,0.1,0.1);
+    glTranslatef(vert[0]+5,vert[1]+5,0);
+    glScalef(3,3,0);
+    glEnableClientState(GL_VERTEX_ARRAY);
 
 
+
+    glVertexPointer(2, GL_FLOAT, 16, btn1.buffer);
+    glDrawArrays(GL_QUADS, 0, btn1.num_quads*4);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glPopMatrix();
+}
+*/
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,
@@ -85,6 +114,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     init_buttons();
     //getButtons()[0].isActive = false;
     Load_Texture( "./Assets/crab.png", &texture, GL_REPEAT, GL_REPEAT, GL_NEAREST);
+    Load_Texture( "./Assets/background.png", &game_background, GL_REPEAT, GL_REPEAT, GL_NEAREST);
 
     /* program main loop */
     while (!bQuit)
@@ -107,13 +137,15 @@ int WINAPI WinMain(HINSTANCE hInstance,
         {
             /* OpenGL animation code goes here */
 
-            if (getState() == 2) glClearColor(0.4f, 0.6f, 1.0f, 0.0f);
-            else  glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+            //if (getState() == 2) glClearColor(0.4f, 0.6f, 1.0f, 0.0f);
+            //else  glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
+            glClearColor(0.8f, 0.8f, 0.6f, 0.0f);
+            if (getState() != 3) glClear(GL_COLOR_BUFFER_BIT);
 
             switch (getState()) {
                 case 1: Show_Background(texture); break;
-                case 2: Game(texture); break;
+                case 2: Game(texture, game_background); break;
+                case 3: break;
             }
 
             glPushMatrix();

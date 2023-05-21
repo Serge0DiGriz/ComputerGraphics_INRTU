@@ -164,3 +164,199 @@
 1681092436 c:\users\i\documents\codeblocks\game\game.hpp
 	<string>
 
+1681103168 source:e:\ИРНИТУ\Комп-Граф\game\game.cpp
+	<gl/gl.h>
+	<math.h>
+	<string>
+	"game.hpp"
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+
+1681102130 e:\ИРНИТУ\Комп-Граф\game\game.hpp
+	<string>
+	<iostream>
+
+1681087318 e:\ИРНИТУ\Комп-Граф\game\texture.hpp
+
+1674029754 e:\ИРНИТУ\Комп-Граф\game\stb-master_lib\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1681103332 source:e:\ИРНИТУ\Комп-Граф\game\main.cpp
+	<windows.h>
+	<gl/gl.h>
+	"menu.hpp"
+	"texture.hpp"
+	"game.hpp"
+
+1679889890 e:\ИРНИТУ\Комп-Граф\game\menu.hpp
+
+1679889858 source:e:\ИРНИТУ\Комп-Граф\game\menu.cpp
+	"menu.hpp"
+	<gl/gl.h>
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	"stb-master_lib/stb_easy_font.h"
+	"texture.hpp"
+
+1674029754 e:\ИРНИТУ\Комп-Граф\game\stb-master_lib\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
+1679888762 source:e:\ИРНИТУ\Комп-Граф\game\texture.cpp
+	<gl/gl.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string>
+	<malloc.h>
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+
+1684701901 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\game.cpp
+	<gl/gl.h>
+	<math.h>
+	<string>
+	"game.hpp"
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+	"menu.hpp"
+
+1684701901 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\game.hpp
+	<string>
+	<iostream>
+	"menu.hpp"
+
+1684701902 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\texture.hpp
+
+1684701903 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\stb-master_lib\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1684701901 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\main.cpp
+	<windows.h>
+	<gl/gl.h>
+	"menu.hpp"
+	"texture.hpp"
+	"game.hpp"
+
+1684701901 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\menu.hpp
+
+1684701901 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\menu.cpp
+	"menu.hpp"
+	<gl/gl.h>
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	"stb-master_lib/stb_easy_font.h"
+	"texture.hpp"
+
+1684701903 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\stb-master_lib\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
+1684701902 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\game\texture.cpp
+	<gl/gl.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string>
+	<malloc.h>
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+
+1679889858 source:e:\ИРНИТУ\Компьютерная графика\game\menu.cpp
+	"menu.hpp"
+	<gl/gl.h>
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	"stb-master_lib/stb_easy_font.h"
+	"texture.hpp"
+
+1679889890 e:\ИРНИТУ\Компьютерная графика\game\menu.hpp
+
+1674029754 e:\ИРНИТУ\Компьютерная графика\game\stb-master_lib\stb_easy_font.h
+	<stdlib.h>
+	<math.h>
+
+1681087318 e:\ИРНИТУ\Компьютерная графика\game\texture.hpp
+
+1682312266 source:e:\ИРНИТУ\Компьютерная графика\game\texture.cpp
+	<gl/gl.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string>
+	<malloc.h>
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+
+1674029754 e:\ИРНИТУ\Компьютерная графика\game\stb-master_lib\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1682311698 source:e:\ИРНИТУ\Компьютерная графика\game\main.cpp
+	<windows.h>
+	<gl/gl.h>
+	"menu.hpp"
+	"texture.hpp"
+	"game.hpp"
+
+1682311450 e:\ИРНИТУ\Компьютерная графика\game\game.hpp
+	<string>
+	<iostream>
+	"menu.hpp"
+
+1682313168 source:e:\ИРНИТУ\Компьютерная графика\game\game.cpp
+	<gl/gl.h>
+	<math.h>
+	<string>
+	"game.hpp"
+	"texture.hpp"
+	"stb-master_lib/stb_image.h"
+	"menu.hpp"
+
