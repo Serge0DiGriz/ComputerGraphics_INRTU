@@ -38,6 +38,7 @@ void MoveCamera(){
 }
 
 void DrawGrid(int n) {
+
     glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, &grid_vert);

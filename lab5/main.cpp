@@ -32,6 +32,20 @@ void MoveCamera(){
 }
 
 void DrawGrid(int n) {
+
+    glBegin(GL_LINES);
+        glLineWidth(10);
+        glColor3d(1,0,0);
+        glVertex3f(-100, 0, 0);
+        glVertex3f( 100, 0, 0);
+            glColor3d(0,1,0);
+            glVertex3f(0, -100, 0);
+            glVertex3f(0,  100, 0);
+        glColor3d(0,0,1);
+        glVertex3f(0, 0, -100);
+        glVertex3f(0, 0,  100);
+    glEnd();
+
     glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, &vert);
         for (int i=-n/2; i<n/2+n%2; i++) {
