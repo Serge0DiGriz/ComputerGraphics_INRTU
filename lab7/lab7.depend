@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1684728140 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\lab5_7\lab7\camera.cpp
+	<windows.h>
+	<gl/gl.h>
+	<math.h>
+	"camera.h"
+
+1684714824 c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\lab5_7\lab7\camera.h
+
+1684924518 source:c:\users\korenmax\documents\ИРНИТУ\Компьютерная графика\lab5_7\lab7\main.cpp
+	<windows.h>
+	<gl/gl.h>
+	<math.h>
+	"camera.h"
+
